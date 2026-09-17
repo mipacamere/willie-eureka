@@ -94,7 +94,7 @@ export function ItineraryApp() {
   const currentLang = AVAILABLE_LANGUAGES.find((l) => l.code === locale)!;
 
   return (
-    <div className={`container ${theme}`}>
+    <div className={`itinerary-fullscreen container ${theme}`}>
       <div className={`navbar ${isNavbarHidden ? "hidden" : ""}`}>
         <div className="lang-bar">
           <div className="lang-pill">
