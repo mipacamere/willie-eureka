@@ -1,7 +1,6 @@
 /* ===== ORIGINAL 1DAY-ITINERARY CSS - PRESERVED 1:1 ===== */
 
 :root {
-  /* Light theme (default) */
   --primary-color: #00897b;
   --primary-hover: #00796b;
   --accent-line: #00897b;
@@ -55,9 +54,7 @@
   --theme-icon-color: #b0bec5;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -68,16 +65,11 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.container {
-  min-height: 100vh;
-}
+.container { min-height: 100vh; }
 
-/* Navbar */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   background: var(--card-background);
   padding: 1rem 2rem;
   display: flex;
@@ -90,27 +82,20 @@ body {
   transition: transform 0.3s ease;
 }
 
-.navbar.hidden {
-  transform: translateY(-100%);
-}
+.navbar.hidden { transform: translateY(-100%); }
 
-/* Language bar (wrapper) */
 .lang-bar {
   display: flex;
   align-items: center;
-  gap: 0;
   background: var(--card-background);
   border: 1px solid var(--border-color);
   border-radius: 10px;
   box-shadow: 0 2px 8px var(--shadow-light);
-  overflow: visible;
   height: 40px;
   padding: 0 4px;
 }
 
-.lang-pill {
-  position: relative;
-}
+.lang-pill { position: relative; }
 
 .lang-trigger {
   display: flex;
@@ -124,35 +109,22 @@ body {
   color: var(--text-color);
   border-radius: 8px;
   transition: background 0.15s;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
   font-family: inherit;
   text-transform: none;
   letter-spacing: normal;
   margin: 0;
 }
 
-.lang-trigger:hover {
-  background: var(--highlight-bg);
-}
+.lang-trigger:hover { background: var(--highlight-bg); }
 
 .lang-globe svg {
-  width: 15px;
-  height: 15px;
+  width: 15px; height: 15px;
   stroke: var(--primary-color);
   display: block;
 }
 
-.lang-current {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.lang-flag {
-  font-size: 16px;
-  line-height: 1;
-}
+.lang-current { display: flex; align-items: center; gap: 4px; }
+.lang-flag { font-size: 16px; line-height: 1; }
 
 .lang-code {
   font-size: 12px;
@@ -162,17 +134,14 @@ body {
 }
 
 .lang-chevron svg {
-  width: 11px;
-  height: 11px;
+  width: 11px; height: 11px;
   stroke: var(--text-color);
   opacity: 0.5;
   display: block;
   transition: transform 0.2s ease;
 }
 
-.lang-chevron.rotated svg {
-  transform: rotate(180deg);
-}
+.lang-chevron.rotated svg { transform: rotate(180deg); }
 
 .lang-dropdown {
   position: absolute;
@@ -185,7 +154,6 @@ body {
   box-shadow: 0 8px 24px rgba(0,0,0,0.14), 0 2px 6px rgba(0,0,0,0.08);
   padding: 5px;
   z-index: 200;
-  overflow: hidden;
 }
 
 .lang-option {
@@ -201,32 +169,20 @@ body {
   color: var(--text-color);
   transition: background 0.12s;
   text-align: left;
-  -webkit-tap-highlight-color: transparent;
   font-family: inherit;
   text-transform: none;
   letter-spacing: normal;
   margin: 0;
 }
 
-.lang-option:hover {
-  background: var(--highlight-bg);
-}
+.lang-option:hover { background: var(--highlight-bg); }
 
 .lang-option.selected {
   background: color-mix(in srgb, var(--primary-color) 12%, transparent);
 }
 
-.opt-flag {
-  font-size: 18px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.opt-name {
-  font-size: 13px;
-  font-weight: 500;
-  flex: 1;
-}
+.opt-flag { font-size: 18px; line-height: 1; flex-shrink: 0; }
+.opt-name { font-size: 13px; font-weight: 500; flex: 1; }
 
 .lang-option.selected .opt-name {
   color: var(--primary-color);
@@ -234,8 +190,7 @@ body {
 }
 
 .opt-check svg {
-  width: 14px;
-  height: 14px;
+  width: 14px; height: 14px;
   stroke: var(--primary-color);
   display: block;
   flex-shrink: 0;
@@ -245,7 +200,6 @@ body {
   width: 1px;
   height: 20px;
   background: var(--border-color);
-  flex-shrink: 0;
   margin: 0 2px;
 }
 
@@ -261,26 +215,20 @@ body {
   border-radius: 8px;
   color: var(--theme-icon-color);
   transition: background 0.15s;
-  flex-shrink: 0;
-  -webkit-tap-highlight-color: transparent;
   padding: 0;
   margin: 0;
   text-transform: none;
   letter-spacing: normal;
 }
 
-.theme-btn:hover {
-  background: var(--highlight-bg);
-}
+.theme-btn:hover { background: var(--highlight-bg); }
 
 .theme-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 18px; height: 18px;
   stroke: var(--theme-icon-color);
   display: block;
 }
 
-/* Content container */
 .content-container {
   padding: 6rem 0 3rem 0;
   display: grid;
@@ -299,7 +247,6 @@ body {
   margin: 0 1rem;
 }
 
-/* Images */
 .image-container {
   margin: 2rem 0;
   border-radius: 8px;
@@ -311,10 +258,8 @@ body {
 .image-container::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
   background: var(--accent-line);
 }
 
@@ -325,15 +270,9 @@ body {
   transition: transform 0.3s ease;
 }
 
-.main-image:hover {
-  transform: scale(1.03);
-}
+.main-image:hover { transform: scale(1.03); }
 
-/* Typography */
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
   margin-bottom: 1.5rem;
   line-height: 1.2;
   color: var(--text-color);
@@ -341,18 +280,10 @@ h4 {
   letter-spacing: -0.02em;
 }
 
-h1 {
-  font-size: 2.5rem;
-}
-h2 {
-  font-size: 2rem;
-}
-h3 {
-  font-size: 1.6rem;
-}
-h4 {
-  font-size: 1.3rem;
-}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.3rem; }
 
 p {
   margin-bottom: 1.5rem;
@@ -360,7 +291,6 @@ p {
   line-height: 1.8;
 }
 
-/* Options container for itinerary choices */
 .options-container {
   display: flex;
   flex-direction: column;
@@ -376,10 +306,7 @@ p {
   border: 1px solid var(--border-color);
 }
 
-.option h3 {
-  color: var(--text-color);
-  margin-top: 0;
-}
+.option h3 { color: var(--text-color); margin-top: 0; }
 
 .option-button {
   padding: 10px 20px;
@@ -393,9 +320,7 @@ p {
   transition: background-color 0.2s;
 }
 
-.option-button:hover {
-  background-color: var(--primary-hover);
-}
+.option-button:hover { background-color: var(--primary-hover); }
 
 .final-note {
   font-style: italic;
@@ -414,19 +339,14 @@ p {
   color: var(--text-color);
 }
 
-/* Map section */
-.map-section {
-  margin: 20px 0;
-}
+.map-section { margin: 20px 0; }
 
 .gmaps-icon {
   color: white;
-  width: 16px;
-  height: 16px;
+  width: 16px; height: 16px;
   flex-shrink: 0;
 }
 
-/* Buttons */
 button {
   cursor: pointer;
   border: none;
@@ -488,13 +408,8 @@ button.start:hover {
   gap: 1rem;
 }
 
-.buttons-container button.back {
-  margin-right: auto;
-}
-
-.buttons-container button.start {
-  margin-left: auto;
-}
+.buttons-container button.back { margin-right: auto; }
+.buttons-container button.start { margin-left: auto; }
 
 .google-maps-button {
   background: var(--button-bg);
@@ -505,46 +420,21 @@ button.start:hover {
   gap: 0.5rem;
 }
 
-.google-maps-button:hover {
-  background: var(--primary-hover);
-}
+.google-maps-button:hover { background: var(--primary-hover); }
 
-/* Responsive */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-  h2 {
-    font-size: 1.6rem;
-  }
-  h3 {
-    font-size: 1.4rem;
-  }
-  h4 {
-    font-size: 1.2rem;
-  }
-
-  .view-container {
-    padding: 1.5rem;
-  }
-
-  .navbar {
-    padding: 0.5rem 1rem;
-  }
-
-  .options-container {
-    flex-direction: column;
-  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.4rem; }
+  h4 { font-size: 1.2rem; }
+  .view-container { padding: 1.5rem; }
+  .navbar { padding: 0.5rem 1rem; }
+  .options-container { flex-direction: column; }
 }
 
 @media (min-width: 768px) {
-  .options-container {
-    flex-direction: row;
-  }
-  
-  .option {
-    flex: 1;
-  }
+  .options-container { flex-direction: row; }
+  .option { flex: 1; }
 }
 
 @media (max-width: 480px) {
@@ -552,24 +442,12 @@ button.start:hover {
     flex-direction: column;
     gap: 0.8rem;
   }
-
   .buttons-container button.back,
   .buttons-container button.start {
     margin: 0;
     width: 100%;
   }
-
-  .navbar {
-    padding: 0.5rem 0.5rem;
-  }
-
-  .lang-dropdown {
-    left: 0;
-    min-width: 160px;
-  }
-
-  .theme-btn {
-    width: 38px;
-    height: 38px;
-  }
+  .navbar { padding: 0.5rem; }
+  .lang-dropdown { left: 0; min-width: 160px; }
+  .theme-btn { width: 38px; height: 38px; }
 }

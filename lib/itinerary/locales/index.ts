@@ -25,6 +25,15 @@ export interface ItineraryStep {
   linkButtons?: { title: string; description: string; url: string; buttonText: string }[];
   buttons: { label: string; nextId: string }[];
   showBack?: boolean;
+  // Campi per lo step 04itinerary (bivio A/B)
+  optionATitle?: string;
+  optionADescription?: string;
+  optionAButton?: string;
+  optionBTitle?: string;
+  optionBDescription?: string;
+  optionBButton?: string;
+  finalNote?: string;
+  callToAction?: string;
 }
 
 function mergeStep(structure: StepStructure, locale: LocaleCode): ItineraryStep {
@@ -53,6 +62,14 @@ function mergeStep(structure: StepStructure, locale: LocaleCode): ItineraryStep 
       label: t.buttonLabels?.[i] ?? "",
     })),
     showBack: structure.showBack,
+    optionATitle: t.optionATitle,
+    optionADescription: t.optionADescription,
+    optionAButton: t.optionAButton,
+    optionBTitle: t.optionBTitle,
+    optionBDescription: t.optionBDescription,
+    optionBButton: t.optionBButton,
+    finalNote: t.finalNote,
+    callToAction: t.callToAction,
   };
 }
 

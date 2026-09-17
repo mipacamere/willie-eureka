@@ -1,117 +1,112 @@
 "use client";
 
-import { ItineraryTranslation } from "@/lib/itinerary/types";
-import { getStepStructure, FIRST_STEP_ID } from "@/lib/itinerary/structure";
+import type { ItineraryStep } from "@/lib/itinerary/locales";
 import { GoogleMapButton } from "./GoogleMapButton";
 import { NavigationButtons } from "./NavigationButtons";
 
 interface ItineraryStepViewProps {
   currentId: string;
-  step: ItineraryTranslation | null;
+  step: ItineraryStep;
   onNavigate: (id: string) => void;
+  onBack: () => void;
   backLabel: string;
   homeLabel: string;
 }
+
+const OPTION_TARGETS: Record<string, [string, string]> = {
+  "04itinerary": ["05AcapoMilazzoDirections", "05BspiaggiaPonente"],
+};
 
 export function ItineraryStepView({
   currentId,
   step,
   onNavigate,
+  onBack,
   backLabel,
   homeLabel,
 }: ItineraryStepViewProps) {
-  if (!step) return null;
-
-  const structure = getStepStructure(currentId);
+  const isIntro = currentId === "00intro";
+  const isChoice = currentId === "04itinerary";
+  const optionTargets = OPTION_TARGETS[currentId];
 
   return (
     <div className="view-container">
-      {currentId === "00intro" ? (
-        <h1>{step.title}</h1>
-      ) : (
-        <h2>{step.title}</h2>
-      )}
+      {isIntro ? <h1>{step.title}</h1> : <h2>{step.title}</h2>}
 
-      {step.paragraphsHtml && step.paragraphsHtml.length > 0 && (
-        <>
-          {step.paragraphsHtml.map((p, i) => (
-            <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+      {step.paragraphsHtml.map((p, i) => (
+        <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+      ))}
+
+      {step.listHtml && step.listHtml.length > 0 && (
+        <ul>
+          {step.listHtml.map((li, i) => (
+            <li key={i} dangerouslySetInnerHTML={{ __html: li }} />
           ))}
-        </>
+        </ul>
       )}
 
-      {structure?.options && (
+      {/* Bivio A/B (solo 04itinerary) */}
+      {isChoice && optionTargets && (
         <div className="options-container">
-          {structure.options.map((option, i) => (
-            <div key={option.nextId} className="option">
-              <h3 dangerouslySetInnerHTML={{ __html: (step as any)[option.titleKey] || option.titleKey }} />
-              <p dangerouslySetInnerHTML={{ __html: (step as any)[option.descriptionKey] || option.descriptionKey }} />
-              <button
-                className="option-button"
-                onClick={() => onNavigate(option.nextId)}
-              >
-                {(step as any)[option.buttonKey] || option.buttonKey}
-              </button>
-            </div>
-          ))}
+          <div className="option">
+            <h3>{step.optionATitle}</h3>
+            <p>{step.optionADescription}</p>
+            <button className="option-button" onClick={() => onNavigate(optionTargets[0])}>
+              {step.optionAButton}
+            </button>
+          </div>
+          <div className="option">
+            <h3>{step.optionBTitle}</h3>
+            <p>{step.optionBDescription}</p>
+            <button className="option-button" onClick={() => onNavigate(optionTargets[1])}>
+              {step.optionBButton}
+            </button>
+          </div>
         </div>
       )}
 
-      {structure?.image && (
+      {step.image && (
         <div className="image-container">
-          <img
-            src={structure.image.src}
-            alt={step.imageAlt || step.title}
-            className="main-image"
-          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={step.image.src} alt={step.image.alt} className="main-image" />
         </div>
       )}
 
-      {step.paragraphsHtml && step.paragraphsHtml.length > 1 && (
-        <>
-          {step.paragraphsHtml.slice(1).map((p, i) => (
-            <p key={`after-img-${i}`} dangerouslySetInnerHTML={{ __html: p }} />
-          ))}
-        </>
+      {isChoice && step.finalNote && (
+        <p className="final-note" dangerouslySetInnerHTML={{ __html: step.finalNote }} />
+      )}
+      {isChoice && step.callToAction && (
+        <p className="call-to-action" dangerouslySetInnerHTML={{ __html: step.callToAction }} />
       )}
 
-      {currentId === "04itinerary" && (
-        <>
-          {(step as any).finalNote && (
-            <p className="final-note" dangerouslySetInnerHTML={{ __html: (step as any).finalNote }} />
-          )}
-          {(step as any).callToAction && (
-            <p className="call-to-action" dangerouslySetInnerHTML={{ __html: (step as any).callToAction }} />
-          )}
-        </>
-      )}
+      {step.linkButtons?.map((btn, i) => (
+        <GoogleMapButton
+          key={i}
+          title={btn.title}
+          description={btn.description}
+          mapUrl={btn.url}
+          buttonText={btn.buttonText}
+        />
+      ))}
 
-      {structure?.linkUrls && step.linkButtons && step.linkButtons.length > 0 && (
-        <>
-          {step.linkButtons.map((btn, i) => (
-            <GoogleMapButton
-              key={i}
-              title={btn.title}
-              description={btn.description}
-              mapUrl={structure.linkUrls![i]}
-              buttonText={btn.buttonText}
-            />
-          ))}
-        </>
-      )}
+      {/* Pulsanti principali (Avanti / scelte multiple) */}
+      {!isChoice &&
+        step.buttons.map((b) => (
+          <button key={b.nextId} className="main" onClick={() => onNavigate(b.nextId)}>
+            {b.label}
+          </button>
+        ))}
 
-      {structure?.nextIds && structure.nextIds.length === 1 && step.buttonLabels && step.buttonLabels.length > 0 && (
-        <button className="main" onClick={() => onNavigate(structure.nextIds[0])}>
-          {step.buttonLabels[0]}
-        </button>
+      {/* Navigazione Indietro / Torna all'inizio (assente solo nell'intro) */}
+      {!isIntro && (
+        <NavigationButtons
+          showBack={step.showBack !== false}
+          onBack={onBack}
+          onNavigateHome={() => onNavigate("00intro")}
+          backLabel={backLabel}
+          homeLabel={homeLabel}
+        />
       )}
-
-      <NavigationButtons
-        showBack={structure?.showBack !== false && currentId !== FIRST_STEP_ID}
-        onNavigateHome={() => onNavigate(FIRST_STEP_ID)}
-        backLabel={backLabel}
-        homeLabel={homeLabel}
-      />
     </div>
   );
 }

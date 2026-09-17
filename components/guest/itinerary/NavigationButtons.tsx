@@ -1,9 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 interface NavigationButtonsProps {
   showBack?: boolean;
+  onBack: () => void;
   onNavigateHome: () => void;
   backLabel: string;
   homeLabel: string;
@@ -11,16 +10,15 @@ interface NavigationButtonsProps {
 
 export function NavigationButtons({
   showBack = true,
+  onBack,
   onNavigateHome,
   backLabel,
   homeLabel,
 }: NavigationButtonsProps) {
-  const router = useRouter();
-
   return (
     <div className="buttons-container">
       {showBack && (
-        <button className="back" onClick={() => router.back()}>
+        <button className="back" onClick={onBack}>
           {backLabel}
         </button>
       )}

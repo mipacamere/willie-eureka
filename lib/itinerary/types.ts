@@ -13,4 +13,13 @@ export interface ItineraryTranslation {
   imageAlt?: string;
   linkButtons?: ItineraryLinkButtonTranslation[];
   buttonLabels?: string[];
+  // Campi per lo step 04itinerary (bivio A/B)
+  optionATitle?: string;
+  optionADescription?: string;
+  optionAButton?: string;
+  optionBTitle?: string;
+  optionBDescription?: string;
+  optionBButton?: string;
+  finalNote?: string;
+  callToAction?: string;
 }
