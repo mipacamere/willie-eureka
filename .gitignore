@@ -1,0 +1,19 @@
+# Dipendenze (si reinstallano con npm install, non si caricano)
+node_modules/
+npm-debug.log*
+
+# Cartella con i vecchi zip (blocca GitHub per il limite dei 100MB)
+old pages/
+
+# Build e file generati da Next.js in locale
+.next/
+out/
+
+# Variabili d'ambiente (MAI caricare password o chiavi API online)
+.env
+.env*.local
+
+# File di sistema (macOS, Windows, Linux)
+.DS_Store
+Thumbs.db
+*.pem
