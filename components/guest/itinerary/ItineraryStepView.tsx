@@ -4,6 +4,7 @@ import { ItineraryTranslation } from "@/lib/itinerary/types";
 import { getStepStructure, ITINERARY_STRUCTURE } from "@/lib/itinerary/structure";
 
 interface ItineraryStepViewProps {
+  currentId: string;
   step: ItineraryTranslation | null;
   onNavigate: (id: string) => void;
   onBack: () => void;
@@ -11,12 +12,15 @@ interface ItineraryStepViewProps {
   canGoBack: boolean;
 }
 
-export function ItineraryStepView({ step, onNavigate, onBack, onHome, canGoBack }: ItineraryStepViewProps) {
+export function ItineraryStepView({ currentId, step, onNavigate, onBack, onHome, canGoBack }: ItineraryStepViewProps) {
   if (!step) return null;
 
-  const structure = getStepStructure(step.id);
-  const currentIndex = ITINERARY_STRUCTURE.findIndex((s) => s.id === (structure?.id || ""));
+  const structure = getStepStructure(currentId);
+  const currentIndex = ITINERARY_STRUCTURE.findIndex((s) => s.id === currentId);
   const progress = ((currentIndex + 1) / ITINERARY_STRUCTURE.length) * 100;
+  
+  // Gestione sicura di nextIds per evitare errori TypeScript "possibly undefined"
+  const nextIds = structure?.nextIds || [];
 
   return (
     <div className="min-h-screen bg-[#0e0d0b] text-[#e8e4dc] font-sans pb-32">
@@ -120,17 +124,17 @@ export function ItineraryStepView({ step, onNavigate, onBack, onHome, canGoBack 
             <div className="flex-1" /> 
           )}
           
-          {structure?.nextIds.length === 1 ? (
+          {nextIds.length === 1 ? (
             <button
-              onClick={() => onNavigate(structure.nextIds[0])}
+              onClick={() => onNavigate(nextIds[0])}
               className="flex-1 py-3 px-4 rounded-lg bg-[#387882] text-white font-medium hover:bg-[#2d636b] transition-all shadow-lg shadow-[#387882]/20 active:scale-[0.98] flex items-center justify-center gap-2"
             >
               Avanti
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </button>
-          ) : structure?.nextIds.length > 1 ? (
+          ) : nextIds.length > 1 ? (
             <div className="flex-1 grid grid-cols-2 gap-3">
-              {structure.nextIds.map((nextId, i) => (
+              {nextIds.map((nextId, i) => (
                 <button
                   key={nextId}
                   onClick={() => onNavigate(nextId)}

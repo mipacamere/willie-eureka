@@ -7,13 +7,6 @@ import { useLocale } from "@/lib/i18n/LocaleContext";
 import { LanguageSelector } from "@/lib/i18n/LanguageSelector";
 import { ItineraryStepView } from "./ItineraryStepView";
 
-/**
- * Porting del router di 1day-itinerary: ogni step aveva un path reale
- * (es. /06AcapoMilazzo), qui uso un parametro di query (?step=) sulla
- * stessa route — stesso risultato pratico (URL condivisibile, tasto
- * Indietro del browser funzionante tra gli step) senza dover registrare
- * 36 route Next.js separate.
- */
 export function ItineraryApp() {
   const router = useRouter();
   const pathname = usePathname();
@@ -44,6 +37,7 @@ export function ItineraryApp() {
         <LanguageSelector className="[&_button]:bg-neutral-100 [&_button]:text-neutral-800" />
       </div>
       <ItineraryStepView
+        currentId={currentId}
         step={step}
         onNavigate={goTo}
         onBack={goBack}
