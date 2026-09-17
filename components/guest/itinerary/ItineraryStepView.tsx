@@ -29,6 +29,14 @@ export function ItineraryStepView({
   const isChoice = currentId === "04itinerary";
   const optionTargets = OPTION_TARGETS[currentId];
 
+  const buttons = step.buttons ?? [];
+  const labelA = step.optionAButton || buttons[0]?.label || "Percorso A";
+  const labelB = step.optionBButton || buttons[1]?.label || "Percorso B";
+  const titleA = step.optionATitle || "";
+  const titleB = step.optionBTitle || "";
+  const descA = step.optionADescription || "";
+  const descB = step.optionBDescription || "";
+
   return (
     <div className="view-container">
       {isIntro ? <h1>{step.title}</h1> : <h2>{step.title}</h2>}
@@ -45,21 +53,20 @@ export function ItineraryStepView({
         </ul>
       )}
 
-      {/* Bivio A/B (solo 04itinerary) */}
       {isChoice && optionTargets && (
         <div className="options-container">
           <div className="option">
-            <h3>{step.optionATitle}</h3>
-            <p>{step.optionADescription}</p>
+            {titleA && <h3>{titleA}</h3>}
+            {descA && <p>{descA}</p>}
             <button className="option-button" onClick={() => onNavigate(optionTargets[0])}>
-              {step.optionAButton}
+              {labelA}
             </button>
           </div>
           <div className="option">
-            <h3>{step.optionBTitle}</h3>
-            <p>{step.optionBDescription}</p>
+            {titleB && <h3>{titleB}</h3>}
+            {descB && <p>{descB}</p>}
             <button className="option-button" onClick={() => onNavigate(optionTargets[1])}>
-              {step.optionBButton}
+              {labelB}
             </button>
           </div>
         </div>
@@ -89,15 +96,13 @@ export function ItineraryStepView({
         />
       ))}
 
-      {/* Pulsanti principali (Avanti / scelte multiple) */}
       {!isChoice &&
-        step.buttons.map((b) => (
+        buttons.map((b) => (
           <button key={b.nextId} className="main" onClick={() => onNavigate(b.nextId)}>
             {b.label}
           </button>
         ))}
 
-      {/* Navigazione Indietro / Torna all'inizio (assente solo nell'intro) */}
       {!isIntro && (
         <NavigationButtons
           showBack={step.showBack !== false}
