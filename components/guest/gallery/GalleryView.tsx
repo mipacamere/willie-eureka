@@ -12,7 +12,6 @@ export function GalleryView({ title, photos }: { title: string; photos: string[]
     setBroken((prev) => new Set(prev).add(url));
   }
 
-  // Gestione tastiera per il lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxIndex === null) return;
@@ -67,7 +66,6 @@ export function GalleryView({ title, photos }: { title: string; photos: string[]
         </div>
       )}
 
-      {/* Lightbox Modal */}
       {lightboxIndex !== null && visible[lightboxIndex] && (
         <div
           className="fixed inset-0 z-50 bg-[#0e0d0b]/95 backdrop-blur-md flex items-center justify-center p-4 animate-[fadeIn_0.2s_ease-out]"

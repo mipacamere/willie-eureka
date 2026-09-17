@@ -1,7 +1,7 @@
 "use client";
 
 import { ItineraryTranslation } from "@/lib/itinerary/types";
-import { getStepStructure, FIRST_STEP_ID, ITINERARY_STRUCTURE } from "@/lib/itinerary/structure";
+import { getStepStructure, ITINERARY_STRUCTURE } from "@/lib/itinerary/structure";
 
 interface ItineraryStepViewProps {
   step: ItineraryTranslation | null;
