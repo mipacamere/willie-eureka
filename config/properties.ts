@@ -57,9 +57,10 @@ export const properties: Record<PropertySlug, PropertyConfig> = {
     cin: "IT083049C2UKATRA95",
     guestAccessToken: resolveGuestAccessToken(process.env.GUEST_ACCESS_TOKEN_MIPA, DEV_FALLBACK_TOKEN_MIPA),
     location: {
-      address: "Via Roma 123, 98057 Milazzo (ME)", // <-- MODIFICA CON L'INDIRIZZO REALE
-      coords: { lat: 38.22139358253553, lng: 15.24303142010567 },
-      mapsUrl: "https://www.google.com/maps/place/?q=38.22139358253553,15.24303142010567",
+      address: "Milazzo (ME)", // Puoi aggiungere il nome della via se lo desideri
+      coords: { lat: 38.21802568136363, lng: 15.23844184082177 },
+      // URL basato su coordinate: il più affidabile per QR code e navigazione
+      mapsUrl: "https://www.google.com/maps/place/?q=38.21802568136363,15.23844184082177",
     },
   },
   "via-nazionale": {
@@ -73,9 +74,10 @@ export const properties: Record<PropertySlug, PropertyConfig> = {
     cin: "IT083077C2V59BCOSW",
     guestAccessToken: resolveGuestAccessToken(process.env.GUEST_ACCESS_TOKEN_VN, DEV_FALLBACK_TOKEN_VN),
     location: {
-      address: "Via Nazionale 456, 98040 San Filippo del Mela (ME)", // <-- MODIFICA CON L'INDIRIZZO REALE
-      coords: { lat: 38.244536652950124, lng: 15.241761685781448 },
-      mapsUrl: "https://www.google.com/maps/place/?q=38.244536652950124,15.241761685781448",
+      address: "San Filippo del Mela (ME)", // Puoi aggiungere il nome della via se lo desideri
+      coords: { lat: 38.18851900067022, lng: 15.274333286923184 },
+      // URL basato su coordinate: il più affidabile per QR code e navigazione
+      mapsUrl: "https://www.google.com/maps/place/?q=38.18851900067022,15.274333286923184",
     },
   },
 };
